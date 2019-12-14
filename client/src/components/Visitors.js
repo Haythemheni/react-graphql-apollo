@@ -23,6 +23,8 @@ export default function Visitors() {
 
     function Filtered() {
         let filteredVisitors;
+
+
         switch (filter) {
             case '':
                 filteredVisitors = visitors
@@ -76,11 +78,11 @@ export default function Visitors() {
                         <div>
                             <em>Filter by: </em>
                             <select onChange={(e) => {setFilter(e.target.value) ;setPage(1)}} className="dropdown">
-                                <option value="" >All time</option>
+                                <option value="" >All Time</option>
                                 <option value="today" >Today</option>
                                 <option value="yesterday">Yesterday</option>
-                                <option value="lastweek">Last week</option>
-                                <option value="thismonth">This month</option>
+                                <option value="lastweek">Last Week</option>
+                                <option value="thismonth">This Month</option>
                             </select>
                         </div>               
                       {  filter == "" ? <div className="listings">

@@ -21,21 +21,15 @@ const client = new ApolloClient({
 
 function App() {
 
-
-
- 
   return (
     <ApolloProvider client={client}>
-      
-      
-            
       <Router>
-       <Sidebar/>  
-      <div className="App container ">
-            <Route exact path="/" component={ ()=> <h1>Home</h1> } />
-            <Route path="/visitors" component={Visitors } />
-      </div>
-       <Footer/>
+        <Sidebar/>  
+            <div className="App container ">
+                  <Route exact path="/" component={ ()=> <h1>Home</h1> } />
+                  <Route path="/visitors" component={Visitors } />
+            </div>
+        <Footer/>
       </Router>
 
       
