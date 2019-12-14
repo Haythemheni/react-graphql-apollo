@@ -1,4 +1,6 @@
 import React from 'react'
+import {
+    Link } from "react-router-dom";
 
 export default function Sidebar() {
     return (
@@ -10,15 +12,13 @@ export default function Sidebar() {
 
                 <ul className="list-unstyled components">
                     <li>
-                        <a href="#">About</a>
+                     <Link to="/">   <a href="#">Home</a> </Link>
                     </li>
                     <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                    <Link to="/visitors">       <a href="#">Visitors</a> </Link>
                     </li>
                 </ul>
+              
             </nav>
         </div>
     )

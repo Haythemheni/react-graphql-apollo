@@ -16,8 +16,10 @@ query VisitorsQuery ($page:Int!)  {
 `;
 
 
-export default function Visitors({ filter }) {
-
+export default function Visitors() {
+    const [visitors, setVisitors] = useState([]);
+    const [page, setPage] = useState(1);
+    const [filter,setFilter]=useState('');
 
     function Filtered() {
         let filteredVisitors;
@@ -41,7 +43,7 @@ export default function Visitors({ filter }) {
                 break;
         }
         return <div className="listings">
-            {filteredVisitors.map((el,i ) => (
+            {filteredVisitors.map((el, i) => (
                 <div key={i} className="listing">
                     <div className="vistor-detail"> <p>Date: </p> <span>{moment(el.date).format(" MMM, ddd D, YYYY")} </span></div>
                     <div className="vistor-detail"> <p>Device: </p> <span> {el.device} </span></div>
@@ -50,8 +52,8 @@ export default function Visitors({ filter }) {
 
             ))}
             <div className="page-btns" >
-                <button type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page - 1) }} >Prev page</button>
-                <button type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page + 1) }}>Next page</button>
+                <button disabled={page===1 ? true : false} type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page - 1) }} >Prev page</button>
+                <button disabled={visitors.length<4 ? true : false} type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page + 1) }}>Next page</button>
             </div>
         </div>
 
@@ -59,8 +61,7 @@ export default function Visitors({ filter }) {
 
     }
 
-    const [visitors, setVisitors] = useState([]);
-    const [page, setPage] = useState(1);
+   
 
     return (
         <>
@@ -71,22 +72,35 @@ export default function Visitors({ filter }) {
                     setVisitors(data.visitors)
 
                     return (
-                        filter == "" ? <div className="listings">
-                            {visitors.map(el => (
-                                <div className="listing">
-                                    <div className="vistor-detail"> <p>Date: </p> <span>{moment(el.date).format(" MMM, ddd D, YYYY")} </span></div>
-                                    <div className="vistor-detail"> <p>Device: </p> <span> {el.device} </span></div>
-                                    <div className="vistor-detail"> <p>Ip: </p> <span> {el.ip}</span></div>
-                                </div>
-                            ))}
-                            <div className="page-btns" >
-                                <button disabled={page == 1 ? true : false} type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page - 1) }} >Prev page</button>
-                                <button disabled={visitors.length < 4} type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page + 1) }}>Next page</button>
+                        <>
+                        <div>
+                            <em>Filter by: </em>
+                            <select onChange={(e) => {setFilter(e.target.value) ;setPage(1)}} className="dropdown">
+                                <option value="" >All time</option>
+                                <option value="today" >Today</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="lastweek">Last week</option>
+                                <option value="thismonth">This month</option>
+                            </select>
+                        </div>               
+                      {  filter == "" ? <div className="listings">
+                        {visitors.map(el => (
+                            <div className="listing">
+                                <div className="vistor-detail"> <p>Date: </p> <span>{moment(el.date).format(" MMM, ddd D, YYYY")} </span></div>
+                                <div className="vistor-detail"> <p>Device: </p> <span> {el.device} </span></div>
+                                <div className="vistor-detail"> <p>Ip: </p> <span> {el.ip}</span></div>
                             </div>
+                        ))}
+                        <div className="page-btns" >
+                            <button disabled={page === 1 ? true : false} type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page - 1) }} >Prev page</button>
+                            <button disabled={visitors.length < 4} type="button" className="btn btn-outline-secondary" onClick={() => { setPage(page + 1) }}>Next page</button>
                         </div>
-                            : <Filtered />
+                    </div>
+                    
+                        : <Filtered />}
+                        </>    
                     )
-                }}
+            }}
 
             </Query>
         </>
