@@ -86,8 +86,8 @@ export default function Visitors() {
                             </select>
                         </div>               
                       {  filter == "" ? <div className="listings">
-                        {visitors.map(el => (
-                            <div className="listing">
+                        {visitors.map((el,i) => (
+                            <div key={i} className="listing">
                                 <div className="vistor-detail"> <p>Date: </p> <span>{moment(el.date).format(" MMM, ddd D, YYYY")} </span></div>
                                 <div className="vistor-detail"> <p>Device: </p> <span> {el.device} </span></div>
                                 <div className="vistor-detail"> <p>Ip: </p> <span> {el.ip}</span></div>

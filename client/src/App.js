@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -8,7 +8,7 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import {
   BrowserRouter as Router,
-  Switch,
+  
   Route,
   
 } from "react-router-dom";
